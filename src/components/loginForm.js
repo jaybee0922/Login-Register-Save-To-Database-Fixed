@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import "../css/loginForm.css";
 
 const LoginForm = ({ onSignUpClick }) => {
@@ -6,6 +7,7 @@ const LoginForm = ({ onSignUpClick }) => {
     username: "",
     password: "",
   });
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,7 +19,10 @@ const LoginForm = ({ onSignUpClick }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
+    // You can add form validation and submission logic here
+
+    // After successful login, navigate to GetStarted page
+    navigate("/get-started"); // Navigate to /get-started route
   };
 
   return (
@@ -49,10 +54,16 @@ const LoginForm = ({ onSignUpClick }) => {
 
       <p className="login-text">
         Don't have an account?{" "}
-        <a href="#" onClick={onSignUpClick}>Sign Up</a> {/* Click handler to show terms modal */}
+        <button
+          type="button"
+          onClick={onSignUpClick}
+          className="sign-up-link-button"
+        >
+          Sign Up
+        </button> 
       </p>
     </div>
   );
 };
 
-export default LoginForm; 
+export default LoginForm;

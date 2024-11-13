@@ -1,0 +1,55 @@
+.getstarted-container {
+    width: 100%;            /* 100% width by default to make it responsive */
+    max-width: 250px;       /* Limits the width to 400px on larger screens */
+    height: auto;           /* Adjusts height dynamically */
+    background-color: #ececec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;    /* Adds a subtle border radius */
+    padding: 20px;          /* Added padding for spacing inside the container */
+    height: 500px;
+
+  }
+  
+  /* Logo styling */
+  .getstarted-logo img {
+    width: 150px;  /* Adjust logo size */
+    margin-bottom: 20px;
+    filter: brightness(92%);
+    margin: 0 auto;
+  }
+
+
+
+  .choose-destination{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .choose-destination > button{
+    border-radius: 500px;
+    border: none;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .lost-dog{
+    background-color: black;
+    color: white;
+  }
+
+  .found-dog{
+    background-color: #cdcdcd;
+
+  }

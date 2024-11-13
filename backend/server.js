@@ -1,64 +1,72 @@
-// server.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const bcrypt = require('bcrypt');
-const User = require('./models/User'); // Import the User model
+
+dotenv.config();
+
 const app = express();
 
 // Middleware setup
-app.use(cors());
-app.use(express.json()); // For parsing application/json
-
-// Load environment variables
-dotenv.config();
+const corsOptions = {
+  origin: 'http://localhost:3000', // React frontend URL
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+};
+app.use(cors(corsOptions));
+app.use(express.json());  // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log('MongoDB connection error:', err));
 
-// POST route to handle user registration
-app.post('/api/register', async (req, res) => {
-  const { fullName, username, email, password } = req.body;
+// Define your Dog schema (without image field)
+const dogSchema = new mongoose.Schema({
+  name: String,
+  age: String,
+  breed: String,
+  color: String,
+  size: String,
+  markings: String,
+  gender: String,
+});
 
-  // Basic validation
-  if (!fullName || !username || !email || !password) {
+const Dog = mongoose.model('Dog', dogSchema);
+
+// POST route to handle dog form submission (without image upload)
+app.post('/api/dog', async (req, res) => {
+  console.log("Received data:", req.body);  // Log form data
+
+  const { name, age, breed, color, size, markings, gender } = req.body;
+
+  if (!name || !age || !breed || !color || !size || !markings || !gender) {
     return res.status(400).json({ error: 'All fields are required.' });
   }
 
   try {
-    // Check if the username or email already exists in the database
-    const existingUser = await User.findOne({
-      $or: [{ username }, { email }]
+    const newDog = new Dog({
+      name,
+      age,
+      breed,
+      color,
+      size,
+      markings,
+      gender,
     });
 
-    if (existingUser) {
-      return res.status(400).json({ error: 'Username or email already exists.' });
-    }
-
-    // Hash the password before saving to database
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      fullName,
-      username,
-      email,
-      password: hashedPassword,
-    });
-
-    await newUser.save();
-    res.status(201).json({ message: 'User registered successfully' });
+    await newDog.save();
+    res.status(201).json({ message: 'Dog information saved!' });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    console.error("Error saving dog info:", err);
+    res.status(500).json({ error: 'Error submitting the form' });
   }
 });
 
-// Server listening
+// Serve the images from the uploads folder (removed since no images are handled anymore)
+// app.use('/uploads', express.static('uploads'));  <-- Removed
+
+// Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
