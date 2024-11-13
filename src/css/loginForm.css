@@ -1,0 +1,131 @@
+/* Default styles for larger screens */
+.login-form-container {
+    width: 20%;
+    height: auto; /* Allow container to adjust height based on content */
+    background-color: #ececec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+}
+
+.login-logo img {
+    width: 200px; /* Adjust size as needed */
+    margin-bottom: 20px;
+    filter: brightness(92%);
+}
+
+.login-form {
+    width: 80%; /* Ensures form elements take up 80% of the container width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the elements within the form */
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    align-self: flex-start; /* Aligns the label to the left */
+}
+
+input {
+    width: 100%; /* Full width of the form */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.login-button {
+    background-color: #030303;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%; /* Ensures the button matches the input width */
+}
+
+.login-button:hover {
+    background-color: #222;
+}
+
+.signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.signup-text a {
+    color: blue;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* Media Queries for different screen sizes */
+
+/* For screens smaller than 1024px (tablets, laptops) */
+@media (max-width: 1024px) {
+    .login-form-container {
+        width: 40%; /* Adjust container width for medium-sized screens */
+    }
+
+    .login-logo img {
+        width: 180px; /* Adjust logo size for tablets and laptops */
+    }
+
+    input,
+    .login-button {
+        font-size: 14px; /* Adjust font size for smaller screens */
+    }
+}
+
+/* For screens smaller than 768px (large mobile screens) */
+@media (max-width: 768px) {
+    .login-form-container {
+        width: 60%; /* Increase width to 60% on smaller screens */
+    }
+
+    .login-logo img {
+        width: 150px; /* Adjust logo size */
+    }
+
+    input,
+    .login-button {
+        font-size: 14px; /* Smaller font size */
+    }
+}
+
+/* For screens smaller than 480px (mobile phones) */
+@media (max-width: 480px) {
+    .login-form-container {
+        width: 80%; /* Further increase width on very small screens */
+        height: auto;
+    }
+
+    .login-logo img {
+        width: 120px; /* Smaller logo for mobile */
+    }
+
+    input,
+    .login-button {
+        font-size: 14px; /* Ensure inputs and button remain readable */
+        padding: 12px; /* Increase padding for better touch interaction */
+    }
+
+    .signup-text {
+        font-size: 12px; /* Smaller text size for mobile */
+    }
+}
